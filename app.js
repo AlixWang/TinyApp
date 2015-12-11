@@ -31,9 +31,9 @@ app.get('/',function(req,res,next){
 			$('#topic_listen .topic_title').eatch(function(idx,element){
 				var $element = $(element);
 				items.push({
-					title:$element.attr('title');
-					herf:$element.attr('herf');
-					link:url.resolve(cnodeUrl,$element.attr('herf'));
+					title:$element.attr('title'),
+					herf:$element.attr('herf'),
+					link:url.resolve(cnodeUrl,$element.attr('herf'))
 					
 				});
 			});
