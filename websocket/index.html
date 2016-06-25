@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SocketIO Chat Room</title>
+    <style>
+        *{
+            margin: 0px;
+            padding:0px;
+            box-sizing: border-box;
+        }
+        body{
+            font:13px Helvetica, Arial;
+        }
+        form{
+            background: #ccc;
+            padding: 2px;
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+        }
+        form input{
+            border: none;padding: 10px;
+            width: 90%;
+            /*margin-right: 5%;*/
+        }
+        form button{
+            width: 9%;
+            background :rgb(10,150,205);
+            border: none;
+            padding: 10px; 
+            
+        }
+        #message{
+            list-style: none;
+        }
+        #message li{
+            padding: 5px 10px;
+        }
+        #message li:nth-child(odd){
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <ul id="message"></ul>
+    <form action="">
+        <input type="text" autocomplete="off" id="m">
+        <button>send</button>
+    </form>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script>
+  var socket = io();
+  $('form').submit(function(e){
+      e.preventDefault();
+      socket.emit('new message',$('#m').val());
+      $("#m").val("");
+      
+  });
+  socket.on('message',function(data){
+      $('#message').append('<li>'+data+'</li>');
+  });
+  socket.on('connection',function(data){
+      alert(data);
+  });
+  socket.on('disconnect',function(data){
+      alert(data);
+  });
+</script>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+    <form action="#" >
+        please type you neackname : <input type="text">
+        <button id="subm">确定</button>
+    </form>
+</body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script>
+        var socket = io();
+        $('form').submit(function(e){
+            e.preventDefault();
+            socket.emit('user',$('input').val);
+            window.open('/');
+        });
+    </script>
+</html>
